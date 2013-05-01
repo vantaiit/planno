@@ -8,7 +8,7 @@ use Plan\EntityBundle\Entity\User;
 /**
  * Relationships
  *
- * @ORM\Table()
+ * @ORM\Table(name="relationships", uniqueConstraints={@ORM\uniqueConstraint(columns={"user_id", "friend_user_id"})})
  * @ORM\Entity(repositoryClass="Plan\EntityBundle\Entity\RelationshipsRepository")
  */
 class Relationships
@@ -23,14 +23,12 @@ class Relationships
     private $id;
 
     /**
-     * @var integer
      *
      * @ORM\Column(name="user_id", type="bigint")
      */
     private $userId;
 
     /**
-     * @var integer
      *
      * @ORM\Column(name="friend_user_id", type="bigint")
      */
@@ -56,6 +54,18 @@ class Relationships
      * @ORM\Column(name="relation_name", type="string", length=50)
      */
     private $relationName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="friends")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="friendsWithMe")
+     * @ORM\JoinColumn(name="friend_user_id", referencedColumnName="id", onDelete="cascade")
+     */
+    private $friend;
 
     /**
      * Get id
@@ -181,16 +191,50 @@ class Relationships
     {
         return $this->relationName;
     }
+
     /**
-     * set user
+     * Set user
      *
      * @param \Plan\EntityBundle\Entity\User $user
      * @return Relationships
-    */
-    public function setUser(\Plan\EntityBundle\Entity\User $user = null){
+     */
+    public function setUser(\Plan\EntityBundle\Entity\User $user = null)
+    {
         $this->user = $user;
 
         return $this;
     }
 
+    /**
+     * Get user
+     *
+     * @return \Plan\EntityBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set friend
+     *
+     * @param \Plan\EntityBundle\Entity\User $friend
+     * @return Relationships
+     */
+    public function setFriend(\Plan\EntityBundle\Entity\User $friend = null)
+    {
+        $this->friend = $friend;
+
+        return $this;
+    }
+
+    /**
+     * Get friend
+     *
+     * @return \Plan\EntityBundle\Entity\User
+     */
+    public function getFriend()
+    {
+        return $this->friend;
+    }
 }
