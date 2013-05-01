@@ -1,0 +1,10 @@
+plan_entity:
+    resource: "@PlanEntityBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+plan_site:
+    resource: "@PlanSiteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
