@@ -23,6 +23,18 @@ class Quicknotes
     private $id;
 
     /**
+     *
+     * @ORM\Column(name="user_id", type="bigint")
+     */
+    private $userId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="friends")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")
+     */
+    private $user;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=100)
@@ -71,17 +83,6 @@ class Quicknotes
      */
     private $reminder;
 
-    /**
-     *
-     * @ORM\Column(name="user_id", type="bigint")
-    */
-    private $userId;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="QuickNotes")
-     * @ORM\JoinColumns(name="user_id", referencedColumnName="id", onDelete="cascade")
-    */
-    private $user;
 
 
     /**
@@ -92,6 +93,29 @@ class Quicknotes
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     * @return Relationships
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->userId;
     }
 
     /**
@@ -256,37 +280,14 @@ class Quicknotes
     }
 
     /**
-     * Set userId
-     *
-     * @param integer $userId
-     * @return QuickNotes
-    */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return \plan\EntityBundle\Entity\User
-    */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
      * Set user
      *
-     * @paran \Plan\EntityBundle\Entity\User $user
-     * @return Quicknotes
-    */
+     * @param \Plan\EntityBundle\Entity\User $user
+     * @return Relationships
+     */
     public function setUser(\Plan\EntityBundle\Entity\User $user = null)
     {
-        $this->user= $user;
+        $this->user = $user;
 
         return $this;
     }
@@ -294,8 +295,8 @@ class Quicknotes
     /**
      * Get user
      *
-     * return \Plan\EntityBundle\Entity\User
-    */
+     * @return \Plan\EntityBundle\Entity\User
+     */
     public function getUser()
     {
         return $this->user;

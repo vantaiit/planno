@@ -55,12 +55,12 @@ class Relationships
      */
     private $relationName;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="friends")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")
      */
     private $user;
-
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="friendsWithMe")
      * @ORM\JoinColumn(name="friend_user_id", referencedColumnName="id", onDelete="cascade")
