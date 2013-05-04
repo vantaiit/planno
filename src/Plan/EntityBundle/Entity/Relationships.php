@@ -55,6 +55,12 @@ class Relationships
      */
     private $relationName;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="family_status", type="boolean")
+     */
+    private $family;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="friends")
@@ -236,5 +242,30 @@ class Relationships
     public function getFriend()
     {
         return $this->friend;
+    }
+
+    /**
+     * Set family
+     *
+     * @param integer $family
+     * @return RelationShips
+    */
+    public function setFamily($family)
+    {
+        $this->family = $family;
+
+        return $this;
+    }
+
+    /**
+     * Get family
+     *
+     * @return integer
+    */
+    public function getFamily()
+    {
+
+        return $this->family;
+
     }
 }

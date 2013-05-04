@@ -1,7 +1,7 @@
-plan_entity:
-    resource: "@PlanEntityBundle/Controller/"
+plan_admin:
+    resource: "@PlanAdminBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /admin
 
 plan_site:
     resource: "@PlanSiteBundle/Controller/"
